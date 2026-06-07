@@ -49,10 +49,12 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 919132149155446097, guid: b9ffc7bf7079ba24fb3d06b5def7f220, type: 3}
     instantiationMode: 0
+  - dependency: {fileID: 2100000, guid: add89f4e01f1ba44caf15546d8b5ca90, type: 2}
+    instantiationMode: 0
   - dependency: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
     instantiationMode: 0
-  - dependency: {fileID: 2800000, guid: 40265a896a0f341bb956e90c59025a29, type: 3}
-    instantiationMode: 1
+  - dependency: {fileID: 919132149155446097, guid: aede8a6de1bf1204f81471a5a4c4f6b0, type: 3}
+    instantiationMode: 0
   - dependency: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 112000000, guid: ecfa265e170ca17408331954fd99945c, type: 2}
@@ -61,10 +63,12 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: 42348e19005b45a45b75f1c8414f96c4, type: 3}
     instantiationMode: 0
-  - dependency: {fileID: 2800000, guid: 26663a5ec9987421996161615506b6c5, type: 3}
+  - dependency: {fileID: 2800000, guid: 40265a896a0f341bb956e90c59025a29, type: 3}
     instantiationMode: 1
   - dependency: {fileID: 8762286023885395077, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
     instantiationMode: 0
+  - dependency: {fileID: 2800000, guid: 26663a5ec9987421996161615506b6c5, type: 3}
+    instantiationMode: 1
   - dependency: {fileID: 2800000, guid: 0a069e5cc50c67a4d9e340feec507cf1, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 919132149155446097, guid: 7084e85e9f4dcb14aa099e2a2cd4190b, type: 3}
@@ -108,6 +112,8 @@ MonoBehaviour:
   - dependency: {fileID: 2800000, guid: 57da91ef0c2a5489891995dc81537253, type: 3}
     instantiationMode: 1
   - dependency: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+    instantiationMode: 0
+  - dependency: {fileID: 2800000, guid: 2d4671471e53c384f9f87b21539ab4ad, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: e1fac3ff01431044292805dc4f4f8fc4, type: 3}
     instantiationMode: 0
