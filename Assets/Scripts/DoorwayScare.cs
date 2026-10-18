@@ -13,8 +13,6 @@ public class DoorwayScare : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float moveSpeed = 4f;
 
-    [SerializeField] private FlashlightToggle flashlightToggle;
-
     private Animator _animator;
     private bool _triggered = false;
     private Vector3 _hiddenPosition = new Vector3(0f, -1000f, 0f);
@@ -36,7 +34,7 @@ public class DoorwayScare : MonoBehaviour
 
     private IEnumerator RunScare()
     {
-        flashlightToggle.StartFlicker();
+        FlashlightToggle.Instance.StartFlicker();
 
         monster.transform.position = pointA.position;
         monster.transform.LookAt(pointB.position);

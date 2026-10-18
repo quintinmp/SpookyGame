@@ -16,10 +16,17 @@ public class FlashlightToggle : MonoBehaviour
 
     private bool _isOn = false;
 
+    public static FlashlightToggle Instance { get; private set; }
+
     private void Start()
     {
         flashlight.enabled = false;
         flashlightEquip.Unequip();
+    }
+
+    void Awake()
+    {
+        Instance = this;
     }
 
     private void Update()

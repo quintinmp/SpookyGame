@@ -21,6 +21,15 @@ public class DoorInteractable : MonoBehaviour, IInteractable
     public bool IsLocked => locked;
     public void Lock() => locked = true;
 
+    public string InteractPrompt
+    {
+        get
+        {
+            if (locked) return "Locked";
+            return door.IsOpen ? "Close" : "Open";
+        }
+    }
+
     public void Interact()
     {
         if (locked)

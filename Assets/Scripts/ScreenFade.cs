@@ -1,26 +1,22 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScreenFade : MonoBehaviour
 {
-    [SerializeField] private Image fadeImage;
+    public static ScreenFade Instance { get; private set; }
 
+    [SerializeField] private Image fadeImage;
 
     public bool IsFading { get; private set; }
 
-    // Fade from current alpha to 0 (reveal)
-    public IEnumerator FadeIn(float duration)
+    void Awake()
     {
-        yield return Fade(1f, 0f, duration);
+        Instance = this;
     }
 
-    // Fade from current alpha to 1 (black out)
-    public IEnumerator FadeOut(float duration)
-    {
-        yield return Fade(0f, 1f, duration);
-    }
+    public IEnumerator FadeIn(float duration) => Fade(1f, 0f, duration);
+    public IEnumerator FadeOut(float duration) => Fade(0f, 1f, duration);
 
     private IEnumerator Fade(float from, float to, float duration)
     {
@@ -31,7 +27,9 @@ public class ScreenFade : MonoBehaviour
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            c.a = Mathf.Lerp(from, to, elapsed / duration);
+            float t = elapsed / duration;
+            t = t * t;             
+            c.a = Mathf.Lerp(from, to, t);
             fadeImage.color = c;
             yield return null;
         }
