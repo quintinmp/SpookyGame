@@ -5,9 +5,7 @@ using UnityEngine.InputSystem;
 public class BunkerSceneIntro : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private ScreenFade screenFade;
     [SerializeField] private AmbientAudioManager ambientAudioManager;
-    [SerializeField] private PlayerInput playerInput;
 
     [Header("Intro SFX")]
     [SerializeField] private AudioSource sfxSource;
@@ -24,10 +22,8 @@ public class BunkerSceneIntro : MonoBehaviour
 
     private void Start()
     {
-        // Make sure screen is black and player can't move
-        screenFade.SetAlpha(1f);
-        playerInput.DeactivateInput();
-
+        ScreenFade.Instance.SetAlpha(1f);
+        BootstrapLoader.Instance.SetPlayerInputActive(false);
         StartCoroutine(RunIntro());
     }
 
@@ -44,10 +40,10 @@ public class BunkerSceneIntro : MonoBehaviour
 
         // Wait then fade screen in
         yield return new WaitForSeconds(screenFadeDelay - carDoorDelay);
-        yield return StartCoroutine(screenFade.FadeIn(screenFadeDuration));
+        yield return StartCoroutine(ScreenFade.Instance.FadeIn(screenFadeDuration));
 
         // Intro done, give player control
-        playerInput.ActivateInput();
+        BootstrapLoader.Instance.SetPlayerInputActive(true);
     }
 
     private IEnumerator FadeAmbientIn(float duration)

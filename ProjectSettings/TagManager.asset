@@ -13,9 +13,9 @@ TagManager:
   - Water
   - UI
   - Ceiling
-  - 
-  - 
-  - 
+  - Collectable
+  - Player
+  - Enemy
   - 
   - 
   - 

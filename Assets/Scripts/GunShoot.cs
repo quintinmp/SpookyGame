@@ -24,6 +24,9 @@ public class GunShoot : MonoBehaviour
     [SerializeField] private float spread = 0.02f;
     [SerializeField] private GameObject hitEffectPrefab;
     [SerializeField] private WeaponEquip weaponEquip;
+    [SerializeField] private float gunshotNoiseRadius = 25f;
+    [SerializeField] private int damage = 20;
+    [SerializeField] private PlayerInput playerInput;
 
     private Coroutine _recoilCurrent;
     private float _currentX;
@@ -41,7 +44,9 @@ public class GunShoot : MonoBehaviour
 
     private void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame && weaponEquip.IsEquipped)
+        bool inputActive = playerInput == null || (playerInput.enabled && playerInput.inputIsActive);
+
+        if (inputActive && Mouse.current.leftButton.wasPressedThisFrame && weaponEquip.IsEquipped)
             Shoot();
         if (Keyboard.current.tKey.wasPressedThisFrame)
             Time.timeScale = Time.timeScale == 1f ? 0.1f : 1f;
@@ -63,6 +68,8 @@ public class GunShoot : MonoBehaviour
             audioSource.PlayOneShot(fireClip, randomVolume);
         }
 
+        NoiseSystem.MakeNoise(transform.position, gunshotNoiseRadius);
+
         Vector3 direction = playerCamera.transform.forward;
         direction += new Vector3(
             Random.Range(-spread, spread),
@@ -74,11 +81,25 @@ public class GunShoot : MonoBehaviour
         {
             Debug.Log("Hit: " + hit.collider.gameObject.name);
             Vector3 position = hit.point + hit.normal * decalOffset;
-            Quaternion rotation = Quaternion.LookRotation(-hit.normal);
-            rotation *= Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
-            Instantiate(bulletHolePrefab, position, rotation);
+            GameObject effectPrefab = hitEffectPrefab;
+
+            IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.TakeDamage(damage, hit.point);
+                if (damageable.HitEffectPrefab != null)
+                    effectPrefab = damageable.HitEffectPrefab;
+            }
+            else
+            {
+                Quaternion rotation = Quaternion.LookRotation(-hit.normal);
+                rotation *= Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+                GameObject hole = Instantiate(bulletHolePrefab, position, rotation);
+                hole.transform.SetParent(hit.collider.transform, true);
+            }
+
             Quaternion effectRotation = Quaternion.LookRotation(hit.normal);
-            GameObject effect = Instantiate(hitEffectPrefab, position, effectRotation);
+            Instantiate(effectPrefab, position, effectRotation);
         }
 
     }
