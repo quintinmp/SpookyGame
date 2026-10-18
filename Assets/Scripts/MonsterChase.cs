@@ -407,8 +407,8 @@ public class MonsterChase : MonoBehaviour
 
         if (ambientSource != null) ambientSource.Stop();
 
-        Collider col = GetComponent<Collider>();
-        if (col != null) col.enabled = false;
+        foreach (Collider col in GetComponentsInChildren<Collider>())
+            col.enabled = false;
 
         StartCoroutine(BodyFallRoutine());
 

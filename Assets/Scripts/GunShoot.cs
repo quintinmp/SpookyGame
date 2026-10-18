@@ -86,7 +86,7 @@ public class GunShoot : MonoBehaviour
             IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
             if (damageable != null)
             {
-                damageable.TakeDamage(damage, hit.point);
+                damageable.TakeDamage(damage, hit.point, direction.normalized);
                 if (damageable.HitEffectPrefab != null)
                     effectPrefab = damageable.HitEffectPrefab;
             }
